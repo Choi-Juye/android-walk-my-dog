@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.WalkFragment">
+
+     <androidx.cardview.widget.CardView
+         android:id="@+id/btnStart"
+         android:layout_width="0dp"
+         android:layout_height="@dimen/cardView_height"
+         android:layout_marginBottom="@dimen/default_height"
+         android:layout_marginStart="@dimen/margin_default"
+         android:layout_marginEnd="@dimen/margin_default"
+         app:cardBackgroundColor="@color/theme_yellow"
+         app:cardCornerRadius="@dimen/btn_corner_radius"
+         app:layout_constraintHorizontal_bias="0.5"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintBottom_toBottomOf="parent">
+
+         <TextView
+             android:id="@+id/btnStartTxt"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center"
+             android:text="@string/start"
+             android:textAlignment="center"
+             android:textColor="@color/white"
+             android:textSize="@dimen/content_size"
+             android:textStyle="bold">
+         </TextView>
+
+     </androidx.cardview.widget.CardView>
+
+
+     <RelativeLayout
+         android:id="@+id/mapView"
+         android:layout_width="match_parent"
+         android:layout_height="0dp"
+         app:layout_constraintHorizontal_bias="0.5"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintBottom_toBottomOf="parent"
+         />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clWalkLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:padding="@dimen/margin_default_mul"
+        android:background="@color/white"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textSize="@dimen/medium_content_size"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvDistanceTxt"
+            app:layout_constraintRight_toLeftOf="@+id/btnStop"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDistanceTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="거리"
+            android:textSize="@dimen/content_size"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/tvDistance"
+            app:layout_constraintEnd_toEndOf="@id/tvDistance"
+            app:layout_constraintTop_toBottomOf="@+id/tvDistance"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textSize="@dimen/medium_content_size"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvTimerTxt"
+            app:layout_constraintLeft_toRightOf="@+id/btnStop"
+             />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTimerTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시간"
+            android:textSize="@dimen/content_size"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/tvTimer"
+            app:layout_constraintEnd_toEndOf="@id/tvTimer"
+            app:layout_constraintTop_toBottomOf="@+id/tvTimer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnStop"
+            android:layout_width="@dimen/cardView_width"
+            android:layout_height="@dimen/cardView_width"
+            app:cardBackgroundColor="@color/theme_yellow"
+            app:cardCornerRadius="@dimen/btn_corner_radius"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/btnStopTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/stop"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/medium_content_size"
+                android:textStyle="bold">
+            </TextView>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

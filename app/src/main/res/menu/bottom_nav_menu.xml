@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/journalFragment"
+        android:title="@string/journal"/>
+
+    <item
+        android:id="@+id/walkFragment"
+        android:title="@string/walk" />
+
+    <item
+        android:id="@+id/profileFragment"
+        android:title="@string/profile"/>
+
+</menu>
