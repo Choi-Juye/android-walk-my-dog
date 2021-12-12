@@ -1,11 +1,13 @@
 package com.chloedewyes.walkmydog.service
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.NotificationManager.IMPORTANCE_LOW
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Looper
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
@@ -14,14 +16,21 @@ import androidx.lifecycle.MutableLiveData
 import com.chloedewyes.walkmydog.R
 import com.chloedewyes.walkmydog.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.chloedewyes.walkmydog.other.Constants.ACTION_STOP_SERVICE
+import com.chloedewyes.walkmydog.other.Constants.FASTEST_LOCATION_INTERVAL
+import com.chloedewyes.walkmydog.other.Constants.LOCATION_UPDATE_INTERVAL
 import com.chloedewyes.walkmydog.other.Constants.NOTIFICATION_CHANNEL_ID
 import com.chloedewyes.walkmydog.other.Constants.NOTIFICATION_CHANNEL_NAME
 import com.chloedewyes.walkmydog.other.Constants.NOTIFICATION_ID
+import com.google.android.gms.location.*
+import com.google.android.gms.maps.model.LatLng
 
 class TrackingService : LifecycleService() {
 
+    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
     companion object {
         val isTracking = MutableLiveData<Boolean>()
+        val trackingLocation = MutableLiveData<LatLng>()
     }
 
     private fun postInitialValues() {
@@ -30,7 +39,14 @@ class TrackingService : LifecycleService() {
 
     override fun onCreate() {
         super.onCreate()
+
         postInitialValues()
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+
+        isTracking.observe(this, { isTracking ->
+            updateLocationChecking(isTracking)
+        })
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -51,6 +67,42 @@ class TrackingService : LifecycleService() {
         }
 
         return super.onStartCommand(intent, flags, startId)
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun updateLocationChecking(isTracking: Boolean) {
+        if (isTracking) {
+            if (TrackingUtility.hasLocationPermissions(this)) {
+
+                val locationRequest = LocationRequest.create().apply {
+                    interval = LOCATION_UPDATE_INTERVAL
+                    fastestInterval = FASTEST_LOCATION_INTERVAL
+                    priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+                }
+
+                fusedLocationProviderClient.requestLocationUpdates(
+                    locationRequest,
+                    locationCallback,
+                    Looper.getMainLooper()
+                )
+            }
+        } else {
+            fusedLocationProviderClient.removeLocationUpdates(locationCallback)
+        }
+    }
+
+    val locationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            super.onLocationResult(locationResult)
+            if (isTracking.value!!) {
+                locationResult?.locations?.let {
+                    for (location in it) {
+                        val position = LatLng(location.latitude, location.longitude)
+                        trackingLocation.postValue(position)
+                    }
+                }
+            }
+        }
     }
 
     private fun stopService() {
