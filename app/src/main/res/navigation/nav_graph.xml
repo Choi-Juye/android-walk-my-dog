@@ -12,13 +12,12 @@
         android:label="JournalFragment" />
 
     <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.chloedewyes.walkmydog.ui.fragment.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
         android:id="@+id/walkFragment"
         android:name="com.chloedewyes.walkmydog.ui.fragment.WalkFragment"
         android:label="fragment_walk"
         tools:layout="@layout/fragment_walk" />
-
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.chloedewyes.walkmydog.ui.fragment.ProfileFragment"
-        android:label="ProfileFragment" />
 </navigation>
