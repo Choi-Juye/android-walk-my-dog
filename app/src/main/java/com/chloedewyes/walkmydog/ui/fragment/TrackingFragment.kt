@@ -4,13 +4,12 @@ import android.Manifest
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.chloedewyes.walkmydog.R
-import com.chloedewyes.walkmydog.databinding.FragmentWalkBinding
+import com.chloedewyes.walkmydog.databinding.FragmentTrackingBinding
 import com.chloedewyes.walkmydog.other.Constants
 import com.chloedewyes.walkmydog.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.chloedewyes.walkmydog.other.Constants.ACTION_STOP_SERVICE
@@ -22,9 +21,9 @@ import com.google.android.gms.maps.GoogleMap
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 
-class WalkFragment : Fragment(R.layout.fragment_walk), EasyPermissions.PermissionCallbacks  {
+class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.PermissionCallbacks  {
 
-    private var _binding: FragmentWalkBinding? = null
+    private var _binding: FragmentTrackingBinding? = null
     private val binding get() = _binding!!
 
     private var map: GoogleMap? = null
@@ -36,7 +35,7 @@ class WalkFragment : Fragment(R.layout.fragment_walk), EasyPermissions.Permissio
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentWalkBinding.inflate(inflater, container, false)
+        _binding = FragmentTrackingBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -70,7 +69,6 @@ class WalkFragment : Fragment(R.layout.fragment_walk), EasyPermissions.Permissio
         })
 
         TrackingService.trackingLocation.observe(viewLifecycleOwner, { trackingLocation ->
-            Log.d("test", "trackingLocation : $trackingLocation")
             map?.animateCamera(
                 CameraUpdateFactory.newLatLngZoom(
                     trackingLocation,

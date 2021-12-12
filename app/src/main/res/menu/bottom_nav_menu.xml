@@ -6,8 +6,8 @@
         android:title="@string/journal"/>
 
     <item
-        android:id="@+id/walkFragment"
-        android:title="@string/walk" />
+        android:id="@+id/trackingFragment"
+        android:title="@string/tracking" />
 
     <item
         android:id="@+id/profileFragment"

@@ -3,8 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/walkFragment">
+    app:startDestination="@id/trackingFragment">
 
+    <action android:id="@+id/action_global_trackingFragment"
+        app:destination="@+id/trackingFragment"
+        app:launchSingleTop="true"/>
 
     <fragment
         android:id="@+id/journalFragment"
@@ -16,8 +19,8 @@
         android:name="com.chloedewyes.walkmydog.ui.fragment.ProfileFragment"
         android:label="ProfileFragment" />
     <fragment
-        android:id="@+id/walkFragment"
-        android:name="com.chloedewyes.walkmydog.ui.fragment.WalkFragment"
+        android:id="@+id/trackingFragment"
+        android:name="com.chloedewyes.walkmydog.ui.fragment.TrackingFragment"
         android:label="fragment_walk"
-        tools:layout="@layout/fragment_walk" />
+        tools:layout="@layout/fragment_tracking" />
 </navigation>

@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.NotificationManager.IMPORTANCE_LOW
+import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -14,6 +16,7 @@ import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.MutableLiveData
 import com.chloedewyes.walkmydog.R
+import com.chloedewyes.walkmydog.other.Constants.ACTION_SHOW_TRACKING_FRAGMENT
 import com.chloedewyes.walkmydog.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.chloedewyes.walkmydog.other.Constants.ACTION_STOP_SERVICE
 import com.chloedewyes.walkmydog.other.Constants.FASTEST_LOCATION_INTERVAL
@@ -21,6 +24,7 @@ import com.chloedewyes.walkmydog.other.Constants.LOCATION_UPDATE_INTERVAL
 import com.chloedewyes.walkmydog.other.Constants.NOTIFICATION_CHANNEL_ID
 import com.chloedewyes.walkmydog.other.Constants.NOTIFICATION_CHANNEL_NAME
 import com.chloedewyes.walkmydog.other.Constants.NOTIFICATION_ID
+import com.chloedewyes.walkmydog.ui.MainActivity
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 
@@ -115,10 +119,11 @@ class TrackingService : LifecycleService() {
     private fun startForegroundService() {
         isTracking.postValue(true)
 
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-           createNotificationChannel(notificationManager)
+            createNotificationChannel(notificationManager)
         }
 
         val notificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
@@ -127,12 +132,13 @@ class TrackingService : LifecycleService() {
             .setSmallIcon(R.drawable.ic_paw_theme)
             .setContentTitle("어야가자")
             .setContentText("어야가자 앱에서 산책이 진행 중입니다..")
+            .setContentIntent(getMainActivityPendingIntent())
 
         startForeground(NOTIFICATION_ID, notificationBuilder.build())
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel(notificationManager : NotificationManager ) {
+    private fun createNotificationChannel(notificationManager: NotificationManager) {
         val channel = NotificationChannel(
             NOTIFICATION_CHANNEL_ID,
             NOTIFICATION_CHANNEL_NAME,
@@ -140,5 +146,14 @@ class TrackingService : LifecycleService() {
         )
         notificationManager.createNotificationChannel(channel)
     }
+
+    private fun getMainActivityPendingIntent() = PendingIntent.getActivity(
+        this,
+        0,
+        Intent(this, MainActivity::class.java).also { Intent ->
+            Intent.action = ACTION_SHOW_TRACKING_FRAGMENT
+        },
+        FLAG_UPDATE_CURRENT
+    )
 
 }

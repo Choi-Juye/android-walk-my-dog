@@ -2,8 +2,8 @@
     <string name="app_name">Walk My Dog</string>
 
     <string name="start">산책 시작</string>
-    <string name="stop">정지</string>
-    <string name="walk">산책</string>
+    <string name="stop">산책 끝</string>
+    <string name="tracking">산책</string>
     <string name="journal">일지</string>
     <string name="profile">마이</string>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.WalkFragment">
+    tools:context=".ui.fragment.TrackingFragment">
 
      <com.google.android.gms.maps.MapView
          android:id="@+id/mapView"
@@ -46,10 +46,10 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
         android:id="@+id/clWalkLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="gone"
         android:paddingTop="@dimen/default_height"
         android:paddingRight="@dimen/margin_default_mul"
         android:paddingBottom="@dimen/default_height"
@@ -112,6 +112,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvTimer"
             app:layout_constraintBottom_toBottomOf="parent"
             />
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/btnStop"
