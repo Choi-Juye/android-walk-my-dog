@@ -21,12 +21,13 @@ import com.chloedewyes.walkmydog.service.TrackingService
 import com.chloedewyes.walkmydog.service.TrackingUtility
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
 
 
-class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.PermissionCallbacks  {
+class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.PermissionCallbacks {
 
     private var _binding: FragmentTrackingBinding? = null
     private val binding get() = _binding!!
@@ -55,9 +56,9 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
         }
 
         binding.btnStart.setOnClickListener {
-            if(TrackingUtility.hasLocationPermissions(requireContext())){
+            if (TrackingUtility.hasLocationPermissions(requireContext())) {
                 sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
-            }else {
+            } else {
                 requestPermissions()
             }
         }
@@ -83,7 +84,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
     }
 
     private fun moveCameraToUser() {
-        if(pathPoints.isNotEmpty() && pathPoints.last().isNotEmpty()) {
+        if (pathPoints.isNotEmpty() && pathPoints.last().isNotEmpty()) {
             map?.animateCamera(
                 CameraUpdateFactory.newLatLngZoom(
                     pathPoints.last().last(),
@@ -93,8 +94,28 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
         }
     }
 
+    private fun zoomToSeeWholeTrack() {
+        val bounds = LatLngBounds.Builder()
+        for (polyline in pathPoints) {
+            for (point in polyline) {
+                bounds.include(point)
+            }
+        }
+        val width = binding.mapView.width
+        val height = binding.mapView.height
+
+        map?.animateCamera(
+            CameraUpdateFactory.newLatLngBounds(
+                bounds.build(),
+                width,
+                height,
+                (height * 0.05f).toInt()
+            )
+        )
+    }
+
     private fun addLatestPolyline() {
-        if(pathPoints.isNotEmpty() && pathPoints.last().size > 1) {
+        if (pathPoints.isNotEmpty() && pathPoints.last().size > 1) {
             val preLastLatLng = pathPoints.last()[pathPoints.last().size - 2]
             val lastLatLng = pathPoints.last().last()
             val polylineOptions = PolylineOptions()
@@ -108,11 +129,12 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
 
     private fun updateUI(isTracking: Boolean) {
         this.isTracking = isTracking
-        if(isTracking) {
+        if (isTracking) {
             binding.btnStart.visibility = View.GONE
             binding.clWalkLayout.visibility = View.VISIBLE
 
         } else {
+            zoomToSeeWholeTrack()
             binding.btnStart.visibility = View.VISIBLE
             binding.clWalkLayout.visibility = View.GONE
         }
