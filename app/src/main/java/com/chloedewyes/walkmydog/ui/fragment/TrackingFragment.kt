@@ -14,10 +14,14 @@ import com.chloedewyes.walkmydog.other.Constants
 import com.chloedewyes.walkmydog.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.chloedewyes.walkmydog.other.Constants.ACTION_STOP_SERVICE
 import com.chloedewyes.walkmydog.other.Constants.MAP_ZOOM
+import com.chloedewyes.walkmydog.other.Constants.POLYLINE_COLOR
+import com.chloedewyes.walkmydog.other.Constants.POLYLINE_WIDTH
+import com.chloedewyes.walkmydog.service.Polyline
 import com.chloedewyes.walkmydog.service.TrackingService
 import com.chloedewyes.walkmydog.service.TrackingUtility
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.PolylineOptions
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
 
@@ -30,6 +34,8 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
     private var map: GoogleMap? = null
 
     private var isTracking = false
+
+    private var pathPoints = mutableListOf<Polyline>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,14 +75,35 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
             updateUI(it)
         })
 
-        TrackingService.trackingLocation.observe(viewLifecycleOwner, { trackingLocation ->
+        TrackingService.pathPoints.observe(viewLifecycleOwner, {
+            pathPoints = it
+            addLatestPolyline()
+            moveCameraToUser()
+        })
+    }
+
+    private fun moveCameraToUser() {
+        if(pathPoints.isNotEmpty() && pathPoints.last().isNotEmpty()) {
             map?.animateCamera(
                 CameraUpdateFactory.newLatLngZoom(
-                    trackingLocation,
+                    pathPoints.last().last(),
                     MAP_ZOOM
                 )
             )
-        })
+        }
+    }
+
+    private fun addLatestPolyline() {
+        if(pathPoints.isNotEmpty() && pathPoints.last().size > 1) {
+            val preLastLatLng = pathPoints.last()[pathPoints.last().size - 2]
+            val lastLatLng = pathPoints.last().last()
+            val polylineOptions = PolylineOptions()
+                .color(POLYLINE_COLOR)
+                .width(POLYLINE_WIDTH)
+                .add(preLastLatLng)
+                .add(lastLatLng)
+            map?.addPolyline(polylineOptions)
+        }
     }
 
     private fun updateUI(isTracking: Boolean) {

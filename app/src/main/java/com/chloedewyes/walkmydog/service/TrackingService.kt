@@ -8,6 +8,7 @@ import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
+import android.location.Location
 import android.os.Build
 import android.os.Looper
 import android.util.Log
@@ -28,17 +29,21 @@ import com.chloedewyes.walkmydog.ui.MainActivity
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 
+typealias Polyline = MutableList<LatLng>
+typealias Polylines = MutableList<Polyline>
+
 class TrackingService : LifecycleService() {
 
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     companion object {
         val isTracking = MutableLiveData<Boolean>()
-        val trackingLocation = MutableLiveData<LatLng>()
+        val pathPoints = MutableLiveData<Polylines>()
     }
 
     private fun postInitialValues() {
         isTracking.postValue(false)
+        pathPoints.postValue(mutableListOf())
     }
 
     override fun onCreate() {
@@ -101,13 +106,28 @@ class TrackingService : LifecycleService() {
             if (isTracking.value!!) {
                 locationResult?.locations?.let {
                     for (location in it) {
-                        val position = LatLng(location.latitude, location.longitude)
-                        trackingLocation.postValue(position)
+                        addPathPoint(location)
                     }
                 }
             }
         }
     }
+
+    private fun addPathPoint(location: Location?) {
+        location?.let {
+            val position = LatLng(location.latitude, location.longitude)
+            pathPoints.value?.apply {
+                last().add(position)
+                pathPoints.postValue(this)
+            }
+        }
+    }
+
+    private fun addEmptyPolyline() = pathPoints.value?.apply {
+        add(mutableListOf())
+        pathPoints.postValue(this)
+    } ?: pathPoints.postValue(mutableListOf(mutableListOf()))
+
 
     private fun stopService() {
         isTracking.postValue(false)
@@ -117,6 +137,7 @@ class TrackingService : LifecycleService() {
     }
 
     private fun startForegroundService() {
+        addEmptyPolyline()
         isTracking.postValue(true)
 
         val notificationManager =

@@ -1,5 +1,7 @@
 package com.chloedewyes.walkmydog.other
 
+import com.chloedewyes.walkmydog.R
+
 object Constants {
 
     const val REQUEST_CODE_LOCATION_PERMISSION = 0
@@ -16,4 +18,6 @@ object Constants {
     const val FASTEST_LOCATION_INTERVAL = 2000L
 
     const val MAP_ZOOM = 17F
+    const val POLYLINE_COLOR = R.color.theme_light_blue
+    const val POLYLINE_WIDTH = 15F
 }
