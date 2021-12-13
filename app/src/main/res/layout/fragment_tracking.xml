@@ -18,6 +18,7 @@
          />
 
     <androidx.cardview.widget.CardView
+
         android:id="@+id/btnStart"
         android:layout_width="0dp"
         android:layout_height="@dimen/cardView_height"
@@ -51,9 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingTop="@dimen/default_height"
-        android:paddingRight="@dimen/margin_default_mul"
         android:paddingBottom="@dimen/default_height"
-        android:paddingLeft="@dimen/margin_default_mul"
         android:background="@color/white"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,70 +61,30 @@
         >
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvDistance"
+            android:id="@+id/tvTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_default_mul"
             android:text="00:00"
             android:textSize="@dimen/medium_content_size"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tvDistanceTxt"
-            app:layout_constraintRight_toLeftOf="@+id/btnStop"
-            />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvDistanceTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="거리"
-            android:textSize="@dimen/content_size"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/tvDistance"
-            app:layout_constraintEnd_toEndOf="@id/tvDistance"
-            app:layout_constraintTop_toBottomOf="@+id/tvDistance"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvTimer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="00:00"
-            android:textSize="@dimen/medium_content_size"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tvTimerTxt"
-            app:layout_constraintLeft_toRightOf="@+id/btnStop"
+            app:layout_constraintBottom_toTopOf="@+id/btnStop"
              />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvTimerTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="시간"
-            android:textSize="@dimen/content_size"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/tvTimer"
-            app:layout_constraintEnd_toEndOf="@id/tvTimer"
-            app:layout_constraintTop_toBottomOf="@+id/tvTimer"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-
 
         <androidx.cardview.widget.CardView
             android:id="@+id/btnStop"
             android:layout_width="0dp"
             android:layout_height="@dimen/cardView_height"
-            android:layout_marginStart="@dimen/margin_default_mul"
-            android:layout_marginEnd="@dimen/margin_default_mul"
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginEnd="@dimen/margin_default"
             app:cardBackgroundColor="@color/theme_yellow"
             app:cardCornerRadius="@dimen/btn_corner_radius"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tvDistance"
-            app:layout_constraintEnd_toStartOf="@+id/tvTimer"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView

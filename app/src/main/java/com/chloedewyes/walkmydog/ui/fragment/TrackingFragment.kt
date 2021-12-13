@@ -37,6 +37,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
     private var isTracking = false
 
     private var pathPoints = mutableListOf<Polyline>()
+    private var curTimeInMillis = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -80,6 +81,12 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
             pathPoints = it
             addLatestPolyline()
             moveCameraToUser()
+        })
+
+        TrackingService.timeRunInMillis.observe(viewLifecycleOwner, {
+            curTimeInMillis = it
+            val formattedTime = TrackingUtility.getFormattedStopWatchTime(curTimeInMillis)
+            binding.tvTimer.text = formattedTime
         })
     }
 

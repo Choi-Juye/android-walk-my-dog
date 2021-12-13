@@ -25,25 +25,34 @@ import com.chloedewyes.walkmydog.other.Constants.LOCATION_UPDATE_INTERVAL
 import com.chloedewyes.walkmydog.other.Constants.NOTIFICATION_CHANNEL_ID
 import com.chloedewyes.walkmydog.other.Constants.NOTIFICATION_CHANNEL_NAME
 import com.chloedewyes.walkmydog.other.Constants.NOTIFICATION_ID
+import com.chloedewyes.walkmydog.other.Constants.TIMER_UPDATE_INTERVAL
 import com.chloedewyes.walkmydog.ui.MainActivity
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 typealias Polyline = MutableList<LatLng>
 typealias Polylines = MutableList<Polyline>
 
 class TrackingService : LifecycleService() {
 
+
+
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     companion object {
         val isTracking = MutableLiveData<Boolean>()
         val pathPoints = MutableLiveData<Polylines>()
+        val timeRunInMillis = MutableLiveData<Long>()
     }
 
     private fun postInitialValues() {
         isTracking.postValue(false)
         pathPoints.postValue(mutableListOf())
+        timeRunInMillis.postValue(0L)
     }
 
     override fun onCreate() {
@@ -113,6 +122,28 @@ class TrackingService : LifecycleService() {
         }
     }
 
+    private var isTimerEnabled = false
+    private var lapTime = 0L
+    private var timeStarted = 0L
+
+    private fun startTimer(){
+        isTimerEnabled = true
+        timeStarted = System.currentTimeMillis()
+
+        CoroutineScope(Dispatchers.Main).launch {
+            while (isTracking.value!!) {
+
+                lapTime = System.currentTimeMillis() - timeStarted
+
+                timeRunInMillis.postValue(lapTime)
+
+                delay(TIMER_UPDATE_INTERVAL)
+            }
+
+        }
+
+    }
+
     private fun addPathPoint(location: Location?) {
         location?.let {
             val position = LatLng(location.latitude, location.longitude)
@@ -137,6 +168,8 @@ class TrackingService : LifecycleService() {
     }
 
     private fun startForegroundService() {
+
+        startTimer()
         addEmptyPolyline()
         isTracking.postValue(true)
 
