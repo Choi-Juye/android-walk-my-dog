@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.os.Build
 import com.vmadalin.easypermissions.EasyPermissions
+import java.util.concurrent.TimeUnit
 
 object TrackingUtility {
 
