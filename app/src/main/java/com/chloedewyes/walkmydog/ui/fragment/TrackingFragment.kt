@@ -18,8 +18,9 @@ import com.chloedewyes.walkmydog.service.TrackingService
 import com.chloedewyes.walkmydog.service.TrackingUtility
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import pub.devrel.easypermissions.AppSettingsDialog
-import pub.devrel.easypermissions.EasyPermissions
+import com.vmadalin.easypermissions.EasyPermissions
+import com.vmadalin.easypermissions.dialogs.SettingsDialog
+
 
 class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.PermissionCallbacks  {
 
@@ -114,16 +115,16 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
         }
     }
 
-    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+    override fun onPermissionsDenied(requestCode: Int, perms: List<String>) {
         if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-            AppSettingsDialog.Builder(this).build().show()
+            SettingsDialog.Builder(requireContext()).build().show()
         } else {
             requestPermissions()
         }
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
+        TODO("Not yet implemented")
     }
 
 
@@ -163,4 +164,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
         super.onSaveInstanceState(outState)
         binding.mapView.onSaveInstanceState(outState)
     }
+
+
 }

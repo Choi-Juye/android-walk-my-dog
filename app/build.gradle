@@ -52,7 +52,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:18.0.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
 
-    implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation 'com.vmadalin:easypermissions-ktx:1.0.0'
 
     implementation 'androidx.lifecycle:lifecycle-service:2.3.1'
 }
