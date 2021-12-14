@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.chloedewyes.walkmydog.R
 import com.chloedewyes.walkmydog.databinding.FragmentCreateAccountBinding
-import com.chloedewyes.walkmydog.databinding.FragmentTrackingBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -26,7 +25,7 @@ class CreateAccountFragment : Fragment(R.layout.fragment_create_account) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCreateAccountBinding.inflate(inflater, container, false)
         return binding.root
     }

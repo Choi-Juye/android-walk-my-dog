@@ -10,7 +10,7 @@
         android:id="@+id/tvWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="회원가입"
+        android:text="@string/createAccount"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="@dimen/medium_content_size"
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="이메일을 입력해주세요"
+            android:hint="@string/input_email"
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="비밀번호를 입력해주세요"
+            android:hint="@string/input_password"
             android:inputType="numberPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -80,7 +80,7 @@
             android:id="@+id/tvContinue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="가입하기"
+            android:text="@string/Create"
             android:textColor="@color/white"
             android:textSize="@dimen/content_size"
             android:textStyle="bold"

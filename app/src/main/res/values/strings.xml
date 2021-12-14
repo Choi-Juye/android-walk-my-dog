@@ -6,4 +6,10 @@
     <string name="tracking">산책</string>
     <string name="journal">일지</string>
     <string name="profile">마이</string>
+    <string name="createAccount">회원가입</string>
+    <string name="input_email">이메일을 입력해주세요</string>
+    <string name="input_password">비밀번호를 입력해주세요</string>
+    <string name="Create">가입하기</string>
+    <string name="sign_in">로그인</string>
+    <string name="default_timer">00:00</string>
 </resources>
