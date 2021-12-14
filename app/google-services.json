@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "564297568187",
+    "project_id": "walk-my-dog-334806",
+    "storage_bucket": "walk-my-dog-334806.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564297568187:android:c6cb5037c7d87a22847e9e",
+        "android_client_info": {
+          "package_name": "com.chloedewyes.walkmydog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564297568187-mj1pofuvv6vr1ipu4t4129e9rei119i5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chloedewyes.walkmydog",
+            "certificate_hash": "aef1ec3a4c9f7430271162662f6da8d72da1ea9e"
+          }
+        },
+        {
+          "client_id": "564297568187-9ifoentmvk5era5v9cek6tjrqg15jmk2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASWIZLbwC7GFIHCHYDtoU5dkgm9q3hIw4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564297568187-9ifoentmvk5era5v9cek6tjrqg15jmk2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

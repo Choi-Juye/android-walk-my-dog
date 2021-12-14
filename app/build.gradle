@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -55,4 +56,10 @@ dependencies {
     implementation 'com.vmadalin:easypermissions-ktx:1.0.0'
 
     implementation 'androidx.lifecycle:lifecycle-service:2.3.1'
+
+    implementation platform('com.google.firebase:firebase-bom:29.0.1')
+
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
+
 }
