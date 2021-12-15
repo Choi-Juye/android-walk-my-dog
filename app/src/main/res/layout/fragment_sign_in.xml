@@ -78,31 +78,15 @@
         app:layout_constraintTop_toBottomOf="@+id/tilPassword">
     </TextView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.chloedewyes.walkmydog.custom.CustomBottomButton
         android:id="@+id/continueLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_height"
-        android:background="@color/theme_yellow"
-        android:padding="8dp"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <TextView
-            android:id="@+id/tvContinue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sign_in"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textSize="@dimen/content_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:customText="@string/sign_in"
+        app:customTextColor="@color/white"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
