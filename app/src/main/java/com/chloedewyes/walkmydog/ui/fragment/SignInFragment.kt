@@ -45,7 +45,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
         binding.tvCreateAccount.setOnClickListener {
             findNavController().navigate(
-                R.id.action_signInFragment_to_createAccountFragment
+                R.id.createAccountFragment
             )
         }
     }
@@ -58,6 +58,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                     findNavController().navigate(
                         R.id.action_signInFragment_to_trackingFragment
                     )
+                    Snackbar.make(requireView(), "로그인에 성공했습니다 :)", Snackbar.LENGTH_SHORT).show()
 
                 } else {
                     Snackbar.make(requireView(), "로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요 :(", Snackbar.LENGTH_SHORT).show()

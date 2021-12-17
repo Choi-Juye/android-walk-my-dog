@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.chloedewyes.walkmydog.R
 import com.chloedewyes.walkmydog.databinding.FragmentCreateAccountBinding
+import com.chloedewyes.walkmydog.db.User
 import com.chloedewyes.walkmydog.ui.viewmodels.FirestoreViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -55,17 +56,17 @@ class CreateAccountFragment : Fragment(R.layout.fragment_create_account) {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
 
-                    val uid = auth.uid
-                    if (uid != null) {
-                        viewModel.insertUser(uid)
-                    }
+                    val user = User(auth.uid, email)
+                    viewModel.insertUser(user)
+
                     findNavController().navigate(R.id.signInFragment)
 
                     Log.d("test", "createUserWithEmail:success")
+                    Snackbar.make(requireView(), "회원가입에 성공했습니다 :)", Snackbar.LENGTH_SHORT).show()
 
                 } else {
-
                     Log.w("test", "createUserWithEmail:failure", task.exception)
+                    Snackbar.make(requireView(), "회원가입에 실패했습니다. 이메일과 비밀번호를 확인해주세요 :(", Snackbar.LENGTH_SHORT).show()
                 }
             }
     }

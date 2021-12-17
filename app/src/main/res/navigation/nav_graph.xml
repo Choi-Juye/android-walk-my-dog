@@ -30,12 +30,23 @@
         <action
             android:id="@+id/action_signInFragment_to_trackingFragment"
             app:destination="@id/trackingFragment" />
-        <action
-            android:id="@+id/action_signInFragment_to_createAccountFragment"
-            app:destination="@id/createAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/createAccountFragment"
         android:name="com.chloedewyes.walkmydog.ui.fragment.CreateAccountFragment"
         android:label="CreateAccountFragment" />
+    <fragment
+        android:id="@+id/profileDogFragment"
+        android:name="com.chloedewyes.walkmydog.ui.fragment.ProfileDogFragment"
+        android:label="fragment_profile_dog"
+        tools:layout="@layout/fragment_profile_dog" />
+    <fragment
+        android:id="@+id/profilePersonFragment"
+        android:name="com.chloedewyes.walkmydog.ui.fragment.ProfilePersonFragment"
+        android:label="fragment_profile_person"
+        tools:layout="@layout/fragment_profile_person" >
+        <action
+            android:id="@+id/action_profilePersonFragment_to_profileDogFragment"
+            app:destination="@id/profileDogFragment" />
+    </fragment>
 </navigation>
