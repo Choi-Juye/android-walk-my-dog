@@ -1,21 +1,19 @@
 package com.chloedewyes.walkmydog.repositories
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.chloedewyes.walkmydog.db.Dog
 import com.chloedewyes.walkmydog.db.Person
 import com.chloedewyes.walkmydog.db.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 class FirestoreRepository {
 
     var db = FirebaseFirestore.getInstance()
     var auth = FirebaseAuth.getInstance()
     private val uid = auth.uid
-
-    //var personData : MutableMap<String, Any> = HashMap()
-
-    //var personData : MutableLiveData<HashMap<String, Any>> = MutableLiveData<HashMap<String, Any>>()
 
     fun insertUser(user: User) {
         db.collection("users").document(user.uid!!).set(user)
@@ -29,19 +27,14 @@ class FirestoreRepository {
         db.collection("users/$uid/dog").document(dog.name!!).set(dog)
     }
 
-    /*
-    fun selectPersonProfile(name: String){
-        db.collection("users/$uid/person").document(name).get()
+    fun selectPersonProfile(person: Person){
+        db.collection("users/$uid/person").document(person.name!!).get()
             .addOnSuccessListener { document ->
                 if (document != null){
-                    personData = document.data as MutableMap<String, Any>
+                    Log.d("test", "DocumentSnapshot data: ${document.data}")
                 }
             }
 
     }
-
-    fun selectDogProfile(dog: Dog){
-        db.collection("users/$uid/dog").document(dog.name!!).get()
-    }*/
 
 }

@@ -23,8 +23,7 @@ class FirestoreViewModel : ViewModel(){
         firebaseRepository.insertDogProfile(dog)
     }
 
-    /*
-    fun selectPersonProfile(name: String){
-        firebaseRepository.selectPersonProfile(name)
-    }*/
+    fun selectPersonProfile(person: Person){
+        firebaseRepository.selectPersonProfile(person)
+    }
 }

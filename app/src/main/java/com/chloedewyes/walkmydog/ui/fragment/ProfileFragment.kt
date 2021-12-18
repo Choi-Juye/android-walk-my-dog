@@ -43,11 +43,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             findNavController().navigate(R.id.profilePersonFragment)
         }
 
-
-        /*
-        viewModel.selectPersonProfile("chloe")
-
-        Log.d("test", "chloe : ${viewModel.firebaseRepository.personData}")*/
+        val person = Person("chloe",false)
+        viewModel.selectPersonProfile(person)
 
     }
 }
