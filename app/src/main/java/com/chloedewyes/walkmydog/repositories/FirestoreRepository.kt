@@ -20,18 +20,20 @@ class FirestoreRepository {
     }
 
     fun insertPeronProfile(person: Person) {
-        db.collection("users/$uid/person").document(person.name!!).set(person)
+        db.collection("users/$uid/person").document("$uid").set(person)
     }
 
     fun insertDogProfile(dog: Dog) {
-        db.collection("users/$uid/dog").document(dog.name!!).set(dog)
+        db.collection("users/$uid/dog").document("$uid").set(dog)
     }
 
-    fun selectPersonProfile(person: Person){
-        db.collection("users/$uid/person").document(person.name!!).get()
+
+    fun selectPersonProfile(){
+        db.collection("users/$uid/person").document("$uid").get()
             .addOnSuccessListener { document ->
                 if (document != null){
-                    Log.d("test", "DocumentSnapshot data: ${document.data}")
+                    val personDocument = document.toObject<Person>()!!
+                    Log.d("test", "DocumentSnapshot person: $personDocument")
                 }
             }
 

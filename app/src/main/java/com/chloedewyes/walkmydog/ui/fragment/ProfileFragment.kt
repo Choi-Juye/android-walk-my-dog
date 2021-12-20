@@ -43,8 +43,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             findNavController().navigate(R.id.profilePersonFragment)
         }
 
-        val person = Person("chloe",false)
-        viewModel.selectPersonProfile(person)
+        viewModel.selectPersonProfile()
 
     }
 }
