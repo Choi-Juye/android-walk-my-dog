@@ -28,8 +28,8 @@
         android:name="com.chloedewyes.walkmydog.ui.fragment.SignInFragment"
         android:label="SignInFragment" >
         <action
-            android:id="@+id/action_signInFragment_to_trackingFragment"
-            app:destination="@id/trackingFragment" />
+            android:id="@+id/action_signInFragment_to_profilePersonFragment"
+            app:destination="@id/profilePersonFragment" />
     </fragment>
     <fragment
         android:id="@+id/createAccountFragment"

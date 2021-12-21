@@ -10,7 +10,7 @@
 
     <!--Content-->
     <dimen name="content_size">16sp</dimen>
-    <dimen name="medium_content_size">24sp</dimen>
+    <dimen name="medium_content_size">20sp</dimen>
     <dimen name="large_content_size">40sp</dimen>
 
     <!--cardView-->

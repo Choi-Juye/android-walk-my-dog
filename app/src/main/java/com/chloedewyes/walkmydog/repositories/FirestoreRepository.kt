@@ -1,13 +1,11 @@
 package com.chloedewyes.walkmydog.repositories
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import com.chloedewyes.walkmydog.db.Dog
 import com.chloedewyes.walkmydog.db.Person
 import com.chloedewyes.walkmydog.db.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
 
 class FirestoreRepository {
 
@@ -16,7 +14,7 @@ class FirestoreRepository {
     private val uid = auth.uid
 
     fun insertUser(user: User) {
-        db.collection("users").document(user.uid!!).set(user)
+        db.collection("users").document("$uid").set(user)
     }
 
     fun insertPeronProfile(person: Person) {
@@ -27,16 +25,12 @@ class FirestoreRepository {
         db.collection("users/$uid/dog").document("$uid").set(dog)
     }
 
+    fun selectPersonProfile(): DocumentReference {
+        return db.collection("users/$uid/person").document("$uid")
+    }
 
-    fun selectPersonProfile(){
-        db.collection("users/$uid/person").document("$uid").get()
-            .addOnSuccessListener { document ->
-                if (document != null){
-                    val personDocument = document.toObject<Person>()!!
-                    Log.d("test", "DocumentSnapshot person: $personDocument")
-                }
-            }
-
+    fun selectDogProfile(): DocumentReference {
+       return db.collection("users/$uid/dog").document("$uid")
     }
 
 }

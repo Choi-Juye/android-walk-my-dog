@@ -56,7 +56,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 if (task.isSuccessful) {
                     Log.d("test", "signInWithEmail:success")
                     findNavController().navigate(
-                        R.id.action_signInFragment_to_trackingFragment
+                        R.id.action_signInFragment_to_profilePersonFragment
                     )
                     Snackbar.make(requireView(), "로그인에 성공했습니다 :)", Snackbar.LENGTH_SHORT).show()
 
@@ -80,7 +80,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         val currentUser = auth.currentUser
         if(currentUser != null){
             findNavController().navigate(
-                R.id.action_signInFragment_to_trackingFragment
+                R.id.trackingFragment
             )
         }
     }

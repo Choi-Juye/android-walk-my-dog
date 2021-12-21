@@ -21,7 +21,9 @@ class ProfilePersonFragment: Fragment(R.layout.fragment_profile_person) {
 
     private val viewModel: FirestoreViewModel by viewModels()
 
-    private var isGender:MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    private var genderIs: MutableLiveData<String> = MutableLiveData<String>()
+    private var isGender: MutableLiveData<Boolean> = MutableLiveData()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,34 +36,34 @@ class ProfilePersonFragment: Fragment(R.layout.fragment_profile_person) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        isGender.postValue(false)
 
         binding.tvPersonGenderMale.setOnClickListener {
             isGender.postValue(true)
+            genderIs.postValue("남")
         }
         binding.tvPersonGenderFemale.setOnClickListener {
-            isGender.postValue(false)
+            isGender.postValue(true)
+            genderIs.postValue("여")
         }
 
-        isGender.observe(viewLifecycleOwner,{ isGender ->
+        genderIs.observe(viewLifecycleOwner,{ isGender ->
             updateGender(isGender)
 
             binding.continueBtn.setOnClickListener {
-
                 if (updateUI()){
                     val person = Person(binding.etPersonName.text.toString(), isGender)
                     viewModel.insertPeronProfile(person)
-
                     findNavController().navigate(R.id.action_profilePersonFragment_to_profileDogFragment)
                 } else {
                     Snackbar.make(requireView(), "프로필을 모두 작성해주세요 :)", Snackbar.LENGTH_SHORT).show()
                 }
-
             }
         })
     }
 
-    private fun updateGender(isGender: Boolean){
-        if (isGender){
+    private fun updateGender(genderIs: String){
+        if (genderIs == "남"){
             binding.tvPersonGenderMale.setBackgroundResource(R.drawable.theme_radius)
             binding.tvPersonGenderFemale.setBackgroundResource(R.drawable.grey_radius)
         } else {
@@ -72,7 +74,7 @@ class ProfilePersonFragment: Fragment(R.layout.fragment_profile_person) {
 
     private fun updateUI() : Boolean {
         val name = binding.etPersonName.text.toString()
-        if (name.isEmpty() || isGender == null){
+        if (name.isEmpty() || isGender.value == false){
             return false
         }
         return true

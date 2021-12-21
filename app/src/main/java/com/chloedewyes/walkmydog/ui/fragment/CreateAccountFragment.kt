@@ -59,7 +59,7 @@ class CreateAccountFragment : Fragment(R.layout.fragment_create_account) {
                     val user = User(auth.uid, email)
                     viewModel.insertUser(user)
 
-                    findNavController().navigate(R.id.signInFragment)
+                    findNavController().navigate(R.id.profilePersonFragment)
 
                     Log.d("test", "createUserWithEmail:success")
                     Snackbar.make(requireView(), "회원가입에 성공했습니다 :)", Snackbar.LENGTH_SHORT).show()
