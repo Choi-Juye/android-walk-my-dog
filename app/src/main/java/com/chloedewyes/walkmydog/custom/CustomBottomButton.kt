@@ -37,6 +37,7 @@ class CustomBottomButton(context: Context, attrs: AttributeSet) : ConstraintLayo
 
     fun setTextColor(color: Int){
         customText.setTextColor(color)
+        onRefresh()
     }
 
     private fun onRefresh() {
