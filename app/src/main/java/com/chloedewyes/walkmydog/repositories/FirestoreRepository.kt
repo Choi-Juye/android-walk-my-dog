@@ -1,36 +1,39 @@
 package com.chloedewyes.walkmydog.repositories
 
-import com.chloedewyes.walkmydog.db.Dog
-import com.chloedewyes.walkmydog.db.Person
-import com.chloedewyes.walkmydog.db.User
+
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 
 class FirestoreRepository {
 
     var db = FirebaseFirestore.getInstance()
     var auth = FirebaseAuth.getInstance()
+    var storage = FirebaseStorage.getInstance()
+    val storageRef = storage.reference
     private val uid = auth.uid
 
-    fun insertUser(user: User) {
-        db.collection("users").document("$uid").set(user)
+    fun upsertUser(): DocumentReference {
+        return db.collection("users").document("$uid")
     }
 
-    fun insertPeronProfile(person: Person) {
-        db.collection("users/$uid/person").document("$uid").set(person)
+    fun upsertDog(): CollectionReference {
+        return db.collection("users/$uid/dog")
     }
 
-    fun insertDogProfile(dog: Dog) {
-        db.collection("users/$uid/dog").document("$uid").set(dog)
+    /*
+    fun insertWalk(walk: Walk){
+        db.collection("users/$uid/dog/$uid/walk").document(walk.img).set(walk)
     }
 
-    fun selectPersonProfile(): DocumentReference {
-        return db.collection("users/$uid/person").document("$uid")
+    fun storageMap(mapId: String): StorageReference{
+        return storageRef.child("$uid/mapImages/${mapId}.jpg")
     }
 
-    fun selectDogProfile(): DocumentReference {
-       return db.collection("users/$uid/dog").document("$uid")
-    }
+    fun selectWalk(mapId: String): DocumentReference {
+        return db.collection("users/$uid/dog/walk").document(mapId)
+    }*/
 
 }

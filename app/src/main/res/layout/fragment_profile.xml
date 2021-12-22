@@ -44,52 +44,70 @@
         android:layout_width="match_parent"
         android:layout_height="0.8sp"
         android:background="@color/grey_300"
-        app:layout_constraintTop_toBottomOf="@+id/actionBarLayout"></View>
+        app:layout_constraintTop_toBottomOf="@+id/actionBarLayout">
+    </View>
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cvPersonProfile"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_default"
+        app:cardCornerRadius="@dimen/corner_radius"
+        app:layout_constraintBottom_toTopOf="@+id/clDogs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actionBarLayoutView"
-        app:layout_constraintBottom_toTopOf="@+id/clDogs">
+        app:layout_constraintTop_toBottomOf="@+id/actionBarLayoutView">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvPersonName"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="보호자 닉네임"
-            android:textColor="@color/black"
-            android:textSize="@dimen/medium_content_size"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-            />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivEditProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin_default"
-            android:src="@drawable/ic_edit"
+            android:paddingTop="@dimen/margin_default"
+            android:paddingBottom="@dimen/margin_default"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvPersonName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_default"
+                android:text="보호자 닉네임"
+                android:textColor="@color/black"
+                android:textSize="@dimen/medium_content_size"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivEditProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_default"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clDogs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:background="@color/theme_light_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintTop_toBottomOf="@+id/cvPersonProfile">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvProfile">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvWalkMyDog"
@@ -97,20 +115,46 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
             android:text="같이 산책해요"
-            android:textColor="@color/theme_yellow"
+            android:textColor="@color/black"
             android:textSize="@dimen/content_size"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnAddDog"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/cardView_height"
+            android:layout_margin="@dimen/margin_default"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/btn_corner_radius"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvDogs">
+
+            <TextView
+                android:id="@+id/btnAddDogTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="강아지 등록"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_size"
+                android:textStyle="bold"></TextView>
+
+        </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvDogs"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/margin_default"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvWalkMyDog"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvWalkMyDog" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

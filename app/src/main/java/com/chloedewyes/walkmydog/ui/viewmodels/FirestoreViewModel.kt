@@ -3,54 +3,98 @@ package com.chloedewyes.walkmydog.ui.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.chloedewyes.walkmydog.db.Dog
-import com.chloedewyes.walkmydog.db.Person
 import com.chloedewyes.walkmydog.db.User
+import com.chloedewyes.walkmydog.db.Walk
 import com.chloedewyes.walkmydog.repositories.FirestoreRepository
 import com.google.firebase.firestore.ktx.toObject
-import kotlinx.coroutines.launch
-
 
 class FirestoreViewModel : ViewModel() {
 
     var firebaseRepository = FirestoreRepository()
-    var personDocument: MutableLiveData<Person> = MutableLiveData()
+
+    var walkDocument: MutableLiveData<List<Walk>> = MutableLiveData()
+
     var dogDocument: MutableLiveData<List<Dog>> = MutableLiveData()
+    var userDocument: MutableLiveData<User> = MutableLiveData()
 
-    fun insertUser(user: User) = viewModelScope.launch {
-        firebaseRepository.insertUser(user)
+    fun insertUser(user: User) {
+        firebaseRepository.upsertUser().set(user)
     }
 
-    fun insertPeronProfile(person: Person) = viewModelScope.launch {
-        firebaseRepository.insertPeronProfile(person)
+    fun updateUser(name: String) {
+        firebaseRepository.upsertUser().update("name", name)
     }
 
-    fun insertDogProfile(dog: Dog) = viewModelScope.launch {
-        firebaseRepository.insertDogProfile(dog)
-    }
-
-    fun selectPersonProfile(): LiveData<Person> {
-        firebaseRepository.selectPersonProfile().addSnapshotListener { document, error ->
+    fun selectUser(): LiveData<User> {
+        firebaseRepository.upsertUser().addSnapshotListener { document, error ->
             if (document != null) {
-                val personData = document.toObject<Person>()!!
-                personDocument.value = personData
+                val userData = document.toObject<User>()!!
+                userDocument.value = userData
             }
         }
-        return personDocument
+        return userDocument
     }
 
-    fun selectDogProfile(): LiveData<List<Dog>> {
-        firebaseRepository.selectDogProfile().addSnapshotListener { document, error ->
+    fun insertDog(dog: Dog) {
+        firebaseRepository.upsertDog().add(dog)
+    }
 
-            var dogList: MutableList<Dog> = mutableListOf()
+    fun selectDog(): LiveData<List<Dog>>{
+        firebaseRepository.upsertDog().get()
+            .addOnSuccessListener { result ->
+                var dogList: MutableList<Dog> = mutableListOf()
 
-            if (document != null) {
-                var dogItem = document.toObject<Dog>()
-                dogList.add(dogItem!!)
+                if (result == null){
+                    dogDocument.value = null
+                } else {
+                    for (document in result){
+                        var dogData = document.toObject<Dog>()
+                        dogList.add(dogData!!)
+                        //Log.d("test", "${document.id} => ${document.data}")
+                    }
+                    dogDocument.value = dogList
+                }
             }
-            dogDocument.value = dogList
-        }
         return dogDocument
     }
+
+/*
+    fun insertMap(bitmap: Bitmap) {
+        val outputStream = ByteArrayOutputStream()
+        bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        val mapData = outputStream.toByteArray()
+
+        firebaseRepository.storageMap(bitmap.toString()).putBytes(mapData)
+
+    }
+
+    fun selectMap(mapId: String) {
+        val ONE_MEGABYTE: Long = 1024 * 1024
+        firebaseRepository.storageMap(mapId).getBytes(ONE_MEGABYTE)
+            .addOnSuccessListener {
+
+            }
+    }
+
+    fun insertWalk(walk: Walk) = viewModelScope.launch {
+        firebaseRepository.insertWalk(walk)
+    }
+
+    fun selectWalk(): LiveData<List<Walk>>{
+        firebaseRepository.selectWalk("android.graphics.Bitmap@57f8158").addSnapshotListener { document, error ->
+
+            var walkList: MutableList<Walk> = mutableListOf()
+
+            if (document != null){
+                var walkItem = document.toObject<Walk>()
+                walkList.add(walkItem!!)
+            }
+            walkDocument.value = walkList
+        }
+        return walkDocument
+    }
+*/
+
+
 }

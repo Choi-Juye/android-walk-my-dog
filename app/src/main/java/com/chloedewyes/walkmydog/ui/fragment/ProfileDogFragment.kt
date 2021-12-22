@@ -21,8 +21,7 @@ class ProfileDogFragment: Fragment(R.layout.fragment_profile_dog) {
 
     private val viewModel: FirestoreViewModel by viewModels()
 
-    private var genderIs: MutableLiveData<String> = MutableLiveData()
-    private var isGender: MutableLiveData<Boolean> = MutableLiveData()
+    private var isGender: MutableLiveData<String> = MutableLiveData()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,25 +34,22 @@ class ProfileDogFragment: Fragment(R.layout.fragment_profile_dog) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        isGender.postValue(false)
 
         binding.tvDogGenderMale.setOnClickListener {
-            isGender.postValue(true)
-            genderIs.postValue("남")
+            isGender.postValue("남")
         }
         binding.tvDogGenderFemale.setOnClickListener {
-            isGender.postValue(true)
-            genderIs.postValue("여")
+            isGender.postValue("여")
         }
 
-        genderIs.observe(viewLifecycleOwner,{ isGender ->
+        isGender.observe(viewLifecycleOwner,{ isGender ->
             updateGender(isGender)
-
             binding.continueBtn.setOnClickListener {
                 if (updateUI()){
                     val dog = Dog(binding.etDogName.text.toString(), isGender, binding.etDogAge.text.toString(), binding.etDogWeight.text.toString())
-                    viewModel.insertDogProfile(dog)
-                    findNavController().navigate(R.id.trackingFragment)
+                    viewModel.insertDog(dog)
+
+                    findNavController().navigate(R.id.profileFragment)
                 }else {
                     Snackbar.make(requireView(), "프로필을 모두 작성해주세요 :)", Snackbar.LENGTH_SHORT).show()
                 }
@@ -61,9 +57,8 @@ class ProfileDogFragment: Fragment(R.layout.fragment_profile_dog) {
         })
     }
 
-
-    private fun updateGender(genderIs: String){
-        if (genderIs=="남"){
+    private fun updateGender(isGender: String){
+        if (isGender=="남"){
             binding.tvDogGenderMale.setBackgroundResource(R.drawable.theme_radius)
             binding.tvDogGenderFemale.setBackgroundResource(R.drawable.grey_radius)
         } else {
@@ -76,7 +71,7 @@ class ProfileDogFragment: Fragment(R.layout.fragment_profile_dog) {
         val name = binding.etDogName.text.toString()
         val age = binding.etDogAge.text.toString()
         val weight = binding.etDogWeight.text.toString()
-        if (name.isEmpty() || age.isEmpty() || weight.isEmpty()|| isGender.value == false){
+        if (name.isEmpty() || age.isEmpty() || weight.isEmpty()){
             return false
         }
         return true

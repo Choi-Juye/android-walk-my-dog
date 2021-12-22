@@ -42,7 +42,7 @@ class CreateAccountFragment : Fragment(R.layout.fragment_create_account) {
 
         binding.continueLayout.setOnClickListener {
             if (updateUI()) {
-                createAccount(binding.etEmail.text.toString(), binding.etPassword.text.toString())
+                createAccount(binding.etEmail.text.toString(), binding.etPassword.text.toString(), binding.etName.text.toString())
             } else {
                 Snackbar.make(requireView(), "이메일과 비밀번호를 모두 입력해주세요 :)", Snackbar.LENGTH_SHORT)
                     .show()
@@ -51,15 +51,15 @@ class CreateAccountFragment : Fragment(R.layout.fragment_create_account) {
 
     }
 
-    private fun createAccount(email: String, password: String) {
+    private fun createAccount(email: String, password: String, name: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
 
-                    val user = User(auth.uid, email)
+                    val user = User(auth.uid, email, name)
                     viewModel.insertUser(user)
 
-                    findNavController().navigate(R.id.profilePersonFragment)
+                    findNavController().navigate(R.id.trackingFragment)
 
                     Log.d("test", "createUserWithEmail:success")
                     Snackbar.make(requireView(), "회원가입에 성공했습니다 :)", Snackbar.LENGTH_SHORT).show()
@@ -73,9 +73,10 @@ class CreateAccountFragment : Fragment(R.layout.fragment_create_account) {
 
 
     private fun updateUI(): Boolean {
-        val name = binding.etEmail.text.toString()
+        val email = binding.etEmail.text.toString()
         val weight = binding.etPassword.text.toString()
-        if (name.isEmpty() || weight.isEmpty()) {
+        val name = binding.etName.text.toString()
+        if (email.isEmpty() || weight.isEmpty() || name.isEmpty()) {
             return false
         }
         return true

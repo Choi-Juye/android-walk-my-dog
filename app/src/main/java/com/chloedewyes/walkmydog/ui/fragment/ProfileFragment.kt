@@ -36,6 +36,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRecyclerView()
+
         binding.tvSignOut.setOnClickListener {
             Firebase.auth.signOut()
             findNavController().navigate(R.id.signInFragment)
@@ -45,16 +47,23 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             findNavController().navigate(R.id.profilePersonFragment)
         }
 
-        viewModel.selectPersonProfile().observe(viewLifecycleOwner,{ personDocument ->
-            binding.tvPersonName.text = personDocument.name
+        binding.btnAddDog.setOnClickListener {
+            findNavController().navigate(R.id.profileDogFragment)
+        }
+
+        viewModel.selectUser().observe(viewLifecycleOwner, { userDocument ->
+            binding.tvPersonName.text = userDocument.name
         })
 
-        viewModel.selectDogProfile().observe(viewLifecycleOwner, {
-           dogAdapter.submitList(it)
+        viewModel.selectDog().observe(viewLifecycleOwner, { dogDocument ->
+            if (dogDocument != null) {
+                binding.rvDogs.visibility = View.VISIBLE
+                dogAdapter.submitList(dogDocument)
+            }
         })
 
-        setupRecyclerView()
     }
+
 
     private fun setupRecyclerView() = binding.rvDogs.apply {
         dogAdapter = DogAdapter()
