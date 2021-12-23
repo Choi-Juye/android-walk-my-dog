@@ -6,6 +6,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 class FirestoreRepository {
 
@@ -23,17 +24,11 @@ class FirestoreRepository {
         return db.collection("users/$uid/dog")
     }
 
-    /*
-    fun insertWalk(walk: Walk){
-        db.collection("users/$uid/dog/$uid/walk").document(walk.img).set(walk)
+    fun upsertWalk(): CollectionReference {
+        return db.collection("users/$uid/walk")
     }
 
-    fun storageMap(mapId: String): StorageReference{
-        return storageRef.child("$uid/mapImages/${mapId}.jpg")
+    fun storageMap(mapId: String): StorageReference {
+        return storageRef.child("$uid/mapImages/$mapId")
     }
-
-    fun selectWalk(mapId: String): DocumentReference {
-        return db.collection("users/$uid/dog/walk").document(mapId)
-    }*/
-
 }

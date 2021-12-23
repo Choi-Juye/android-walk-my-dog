@@ -2,14 +2,17 @@ package com.chloedewyes.walkmydog.ui.fragment
 
 import android.Manifest
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.chloedewyes.walkmydog.R
 import com.chloedewyes.walkmydog.databinding.FragmentTrackingBinding
+import com.chloedewyes.walkmydog.db.Walk
 import com.chloedewyes.walkmydog.other.Constants
 import com.chloedewyes.walkmydog.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.chloedewyes.walkmydog.other.Constants.ACTION_STOP_SERVICE
@@ -19,18 +22,23 @@ import com.chloedewyes.walkmydog.other.Constants.POLYLINE_WIDTH
 import com.chloedewyes.walkmydog.service.Polyline
 import com.chloedewyes.walkmydog.service.TrackingService
 import com.chloedewyes.walkmydog.service.TrackingUtility
+import com.chloedewyes.walkmydog.ui.viewmodels.FirestoreViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
+import java.io.ByteArrayOutputStream
+import java.util.*
 
 
 class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.PermissionCallbacks {
 
     private var _binding: FragmentTrackingBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: FirestoreViewModel by viewModels()
 
     private var map: GoogleMap? = null
 
@@ -65,6 +73,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
         }
 
         binding.btnStop.setOnClickListener {
+            saveToDb()
             sendCommandToService(ACTION_STOP_SERVICE)
         }
 
@@ -88,6 +97,25 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
             val formattedTime = TrackingUtility.getFormattedStopWatchTime(curTimeInMillis)
             binding.tvTimer.text = formattedTime
         })
+    }
+
+    private fun saveToDb(){
+        map?.snapshot { bitmap ->
+
+            if (bitmap != null) {
+                viewModel.insertMap(bitmap)
+            }
+
+            val dataTimestamp = Calendar.getInstance().timeInMillis
+            var distanceInMeters = 0
+            for (polyline in pathPoints) {
+                distanceInMeters += TrackingUtility.calculatePolylineLength(polyline).toInt()
+            }
+
+            val walk = Walk(bitmap.toString(), dataTimestamp, curTimeInMillis, distanceInMeters)
+            viewModel.insertWalk(walk)
+
+        }
     }
 
     private fun moveCameraToUser() {

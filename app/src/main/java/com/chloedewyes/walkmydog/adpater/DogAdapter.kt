@@ -2,6 +2,9 @@ package com.chloedewyes.walkmydog.adpater
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
+import androidx.databinding.ObservableArrayList
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,14 +15,11 @@ class DogAdapter: ListAdapter<Dog, DogAdapter.DogViewHolder>(diffCallback) {
 
     inner class DogViewHolder(private val binding: ItemDogBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(dog: Dog){
-            binding.tvDogName.text = dog.name
-
-            val ageGender = "${dog.age}세/${dog.gender}"
-            binding.tvDogAgeGender.text = ageGender
+            binding.dog = dog
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)= DogViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = DogViewHolder(
         ItemDogBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -30,6 +30,7 @@ class DogAdapter: ListAdapter<Dog, DogAdapter.DogViewHolder>(diffCallback) {
     override fun onBindViewHolder(holder: DogViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
+
 
     companion object{
         val diffCallback = object : DiffUtil.ItemCallback<Dog>() {

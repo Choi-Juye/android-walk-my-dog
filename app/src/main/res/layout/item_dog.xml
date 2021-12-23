@@ -1,56 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:tool="http://schemas.android.com/tools">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvDogProfile"
+    <data>
+        <variable
+            name="dog"
+            type="com.chloedewyes.walkmydog.db.Dog" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_default"
-        android:layout_marginEnd="@dimen/margin_default"
-        android:layout_marginBottom="@dimen/margin_default"
-        app:cardCornerRadius="@dimen/corner_radius"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvDogProfile"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="@dimen/margin_default_mul"
-            android:paddingBottom="@dimen/margin_default_mul"
-            app:cardCornerRadius="@dimen/corner_radius">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginEnd="@dimen/margin_default"
+            android:layout_marginBottom="@dimen/margin_default"
+            app:cardCornerRadius="@dimen/corner_radius"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvDogName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_default"
-                android:text="강아지 이름"
-                android:textColor="@color/black"
-                android:textSize="@dimen/content_size"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/margin_default_mul"
+                android:paddingBottom="@dimen/margin_default_mul"
+                app:cardCornerRadius="@dimen/corner_radius">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvDogAgeGender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_default_div"
-                android:layout_marginBottom="@dimen/margin_default"
-                android:text="(0세, 여)"
-                android:textColor="@color/black"
-                android:textSize="@dimen/content_size"
-                app:layout_constraintStart_toEndOf="@+id/tvDogName"
-                app:layout_constraintTop_toTopOf="@+id/tvDogName" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvDogName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_default"
+                    android:text="@{dog.name}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content_size"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tool:text="이름" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvDogAgeGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_default_div"
+                    android:layout_marginBottom="@dimen/margin_default"
+                    android:text='@{dog.age + "세/" + dog.gender}'
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content_size"
+                    app:layout_constraintStart_toEndOf="@+id/tvDogName"
+                    app:layout_constraintTop_toTopOf="@+id/tvDogName"
+                    tool:text="나이" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
