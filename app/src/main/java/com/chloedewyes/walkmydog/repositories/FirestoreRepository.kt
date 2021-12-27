@@ -16,19 +16,19 @@ class FirestoreRepository {
     val storageRef = storage.reference
     private val uid = auth.uid
 
-    fun upsertUser(): DocumentReference {
+    fun userReference(): DocumentReference {
         return db.collection("users").document("$uid")
     }
 
-    fun upsertDog(): CollectionReference {
+    fun dogReference(): CollectionReference {
         return db.collection("users/$uid/dog")
     }
 
-    fun upsertWalk(): CollectionReference {
+    fun walkReference(): CollectionReference {
         return db.collection("users/$uid/walk")
     }
 
-    fun storageMap(mapId: String): StorageReference {
+    fun mapReference(mapId: String): StorageReference {
         return storageRef.child("$uid/mapImages/$mapId")
     }
 }

@@ -27,6 +27,7 @@ import com.chloedewyes.walkmydog.other.Constants.NOTIFICATION_CHANNEL_NAME
 import com.chloedewyes.walkmydog.other.Constants.NOTIFICATION_ID
 import com.chloedewyes.walkmydog.other.Constants.TIMER_UPDATE_INTERVAL
 import com.chloedewyes.walkmydog.ui.MainActivity
+import com.chloedewyes.walkmydog.util.TrackingUtility
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.CoroutineScope

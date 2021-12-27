@@ -1,9 +1,7 @@
 package com.chloedewyes.walkmydog.util
 
-import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.chloedewyes.walkmydog.adpater.DogAdapter
 import com.chloedewyes.walkmydog.adpater.WalkAdapter
 import com.chloedewyes.walkmydog.db.Dog
@@ -20,5 +18,4 @@ fun bindWalkDocument(recyclerView: RecyclerView, walkDocument: List<Walk>?) {
     val adapter = recyclerView.adapter as? WalkAdapter
     adapter?.submitList(walkDocument)
 }
-
 

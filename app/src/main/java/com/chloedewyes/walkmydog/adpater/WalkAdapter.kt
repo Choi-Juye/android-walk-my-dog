@@ -1,6 +1,5 @@
 package com.chloedewyes.walkmydog.adpater
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.chloedewyes.walkmydog.databinding.ItemWalkBinding
 import com.chloedewyes.walkmydog.db.Walk
 import com.chloedewyes.walkmydog.repositories.FirestoreRepository
-import com.chloedewyes.walkmydog.ui.viewmodels.FirestoreViewModel
 
 class WalkAdapter: ListAdapter<Walk, WalkAdapter.WalkViewHolder>(diffCallback) {
 
@@ -20,7 +18,7 @@ class WalkAdapter: ListAdapter<Walk, WalkAdapter.WalkViewHolder>(diffCallback) {
         fun bind(walk: Walk){
             binding.walk = walk
 
-            firebaseRepository.storageMap(walk.mapId).downloadUrl.addOnSuccessListener { url ->
+            firebaseRepository.mapReference(walk.mapId).downloadUrl.addOnSuccessListener { url ->
                 Glide.with(binding.ivMapImage)
                     .load(url)
                     .into(binding.ivMapImage)

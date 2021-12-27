@@ -2,7 +2,6 @@ package com.chloedewyes.walkmydog.ui.fragment
 
 import android.Manifest
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,7 +20,7 @@ import com.chloedewyes.walkmydog.other.Constants.POLYLINE_COLOR
 import com.chloedewyes.walkmydog.other.Constants.POLYLINE_WIDTH
 import com.chloedewyes.walkmydog.service.Polyline
 import com.chloedewyes.walkmydog.service.TrackingService
-import com.chloedewyes.walkmydog.service.TrackingUtility
+import com.chloedewyes.walkmydog.util.TrackingUtility
 import com.chloedewyes.walkmydog.ui.viewmodels.FirestoreViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -29,7 +28,7 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
-import java.io.ByteArrayOutputStream
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -106,13 +105,16 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
                 viewModel.insertMap(bitmap)
             }
 
-            val dataTimestamp = Calendar.getInstance().timeInMillis
+            val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+            val dataTimestamp = dateFormat.format(Calendar.getInstance().timeInMillis)
+
             var distanceInMeters = 0
             for (polyline in pathPoints) {
                 distanceInMeters += TrackingUtility.calculatePolylineLength(polyline).toInt()
             }
 
             val walk = Walk(bitmap.toString(), dataTimestamp, curTimeInMillis, distanceInMeters)
+
             viewModel.insertWalk(walk)
 
         }

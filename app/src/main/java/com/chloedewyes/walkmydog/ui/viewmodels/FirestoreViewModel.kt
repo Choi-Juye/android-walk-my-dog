@@ -2,13 +2,9 @@ package com.chloedewyes.walkmydog.ui.viewmodels
 
 import android.graphics.Bitmap
 import android.util.Log
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
-import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bumptech.glide.Glide
 import com.chloedewyes.walkmydog.db.Dog
 import com.chloedewyes.walkmydog.db.User
 import com.chloedewyes.walkmydog.db.Walk
@@ -17,28 +13,42 @@ import com.google.firebase.firestore.ktx.toObject
 import java.io.ByteArrayOutputStream
 
 class FirestoreViewModel : ViewModel() {
-
     var firebaseRepository = FirestoreRepository()
 
-    private val _walkDocument: MutableLiveData<List<Walk>> = MutableLiveData()
-    val walkDocument: LiveData<List<Walk>> = _walkDocument
-
-    private val _dogDocument: MutableLiveData<List<Dog>> = MutableLiveData()
-    val dogDocument: LiveData<List<Dog>> = _dogDocument
-
     private val _userName = MutableLiveData("Name")
-    val userName: LiveData<String> = _userName
+    private val _dogDocument: MutableLiveData<List<Dog>> = MutableLiveData()
+    private val _walkDocument: MutableLiveData<List<Walk>> = MutableLiveData()
 
-    private val _mapUrl = MutableLiveData("url")
-    val mapUrl: LiveData<String> = _mapUrl
+    val userName: LiveData<String> = _userName
+    val dogDocument: LiveData<List<Dog>> = _dogDocument
+    val walkDocument: LiveData<List<Walk>> = _walkDocument
 
 
     fun insertUser(user: User) {
-        firebaseRepository.upsertUser().set(user)
+        firebaseRepository.userReference().set(user)
+    }
+
+    fun insertDog(dog: Dog) {
+        firebaseRepository.dogReference().add(dog)
+    }
+
+    fun insertWalk(walk: Walk) {
+        firebaseRepository.walkReference().add(walk)
+    }
+
+    fun insertMap(bitmap: Bitmap) {
+        val outputStream = ByteArrayOutputStream()
+        bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        val mapData = outputStream.toByteArray()
+        firebaseRepository.mapReference(bitmap.toString()).putBytes(mapData)
+    }
+
+    fun updateUser(name: String) {
+        firebaseRepository.userReference().update("name", name)
     }
 
     fun selectUser() {
-        firebaseRepository.upsertUser().addSnapshotListener { document, error ->
+        firebaseRepository.userReference().addSnapshotListener { document, error ->
             if (document != null) {
                 val userData = document.toObject<User>()!!
                 _userName.value = userData.name
@@ -46,16 +56,8 @@ class FirestoreViewModel : ViewModel() {
         }
     }
 
-    fun updateUser(name: String) {
-        firebaseRepository.upsertUser().update("name", name)
-    }
-
-    fun insertDog(dog: Dog) {
-        firebaseRepository.upsertDog().add(dog)
-    }
-
     fun selectDog() {
-        firebaseRepository.upsertDog().get()
+        firebaseRepository.dogReference().get()
             .addOnSuccessListener { result ->
                 var dogList: MutableList<Dog> = mutableListOf()
 
@@ -71,12 +73,8 @@ class FirestoreViewModel : ViewModel() {
             }
     }
 
-    fun insertWalk(walk: Walk) {
-        firebaseRepository.upsertWalk().add(walk)
-    }
-
     fun selectWalk() {
-        firebaseRepository.upsertWalk().get()
+        firebaseRepository.walkReference().get()
             .addOnSuccessListener { result ->
                 var walkList: MutableList<Walk> = mutableListOf()
 
@@ -94,10 +92,5 @@ class FirestoreViewModel : ViewModel() {
     }
 
 
-    fun insertMap(bitmap: Bitmap) {
-        val outputStream = ByteArrayOutputStream()
-        bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-        val mapData = outputStream.toByteArray()
-        firebaseRepository.storageMap(bitmap.toString()).putBytes(mapData)
-    }
+
 }

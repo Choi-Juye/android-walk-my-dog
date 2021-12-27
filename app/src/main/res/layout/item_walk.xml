@@ -15,14 +15,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingBottom="@dimen/margin_default_mul">
 
         <ImageView
             android:id="@+id/ivMapImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_height"
+            android:layout_height="350sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +33,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_default"
             android:text="@{String.valueOf(walk.timestamp)}"
-            tool:text="DATE"
+            tool:text="23.12.21"
+            android:textSize="@dimen/content_size"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@+id/tvTime"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,11 +47,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_default"
-            android:text="@{String.valueOf(walk.timeInMillis)}"
-            tool:text="TIME"
-            app:layout_constraintEnd_toStartOf="@+id/tvDistance"
+            android:text='@{String.valueOf(walk.timeInMillis) + " min"}'
+            tool:text="0 min"
+            android:textSize="@dimen/content_size"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tvDate"
             app:layout_constraintTop_toBottomOf="@+id/ivMapImage" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -58,11 +61,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_default"
-            android:text="@{String.valueOf(walk.distanceInMeters)}"
-            tool:text="DISTANCE"
-            app:layout_constraintEnd_toStartOf="@+id/tvTime"
+            android:text='@{String.valueOf(walk.distanceInMeters) + " km"}'
+            tool:text="0 km"
+            android:textSize="@dimen/content_size"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/tvTime"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivMapImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
