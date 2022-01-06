@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.8sp"
             android:background="@color/grey_300"
-            app:layout_constraintTop_toBottomOf="@+id/actionBarLayout"></View>
+            app:layout_constraintTop_toBottomOf="@+id/actionBarLayout" />
 
 
         <androidx.recyclerview.widget.RecyclerView

@@ -18,7 +18,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +49,7 @@
                     android:textSize="@dimen/content_size"
                     app:layout_constraintBottom_toTopOf="@+id/etPersonName"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPerson"></androidx.appcompat.widget.AppCompatTextView>
+                    app:layout_constraintTop_toBottomOf="@+id/tvPerson" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etPersonName"
@@ -63,66 +63,8 @@
                     android:textSize="@dimen/content_size"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvName"></androidx.appcompat.widget.AppCompatEditText>
+                    app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
-                <!--
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvPersonGender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_default"
-                    android:text="성별을 선택해주세요"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/content_size"
-                    app:layout_constraintBottom_toTopOf="@+id/clPersonGender"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etPersonName">
-
-                </androidx.appcompat.widget.AppCompatTextView>
-
-                <LinearLayout
-                    android:id="@+id/clPersonGender"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/default_height"
-                    android:layout_marginStart="@dimen/margin_default"
-                    android:layout_marginTop="@dimen/margin_default"
-                    android:layout_marginEnd="@dimen/margin_default"
-                    android:layout_marginBottom="@dimen/default_height"
-                    android:weightSum="2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPersonGender">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvPersonGenderMale"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/margin_default_div"
-                        android:layout_weight="1"
-                        android:background="@drawable/grey_radius"
-                        android:gravity="center"
-                        android:text="남성"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/content_size">
-
-                    </androidx.appcompat.widget.AppCompatTextView>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvPersonGenderFemale"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/margin_default_div"
-                        android:layout_weight="1"
-                        android:background="@drawable/grey_radius"
-                        android:gravity="center"
-                        android:text="여성"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/content_size">
-
-                    </androidx.appcompat.widget.AppCompatTextView>
-
-                </LinearLayout>
-    -->
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>
@@ -135,7 +77,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:customText="다음"
+            app:customText="변경"
             app:customTextColor="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

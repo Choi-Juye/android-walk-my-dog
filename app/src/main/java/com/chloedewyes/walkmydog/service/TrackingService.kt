@@ -114,7 +114,7 @@ class TrackingService : LifecycleService() {
         override fun onLocationResult(locationResult: LocationResult) {
             super.onLocationResult(locationResult)
             if (isTracking.value!!) {
-                locationResult?.locations?.let {
+                locationResult.locations.let {
                     for (location in it) {
                         addPathPoint(location)
                     }
@@ -202,6 +202,7 @@ class TrackingService : LifecycleService() {
         notificationManager.createNotificationChannel(channel)
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     private fun getMainActivityPendingIntent() = PendingIntent.getActivity(
         this,
         0,

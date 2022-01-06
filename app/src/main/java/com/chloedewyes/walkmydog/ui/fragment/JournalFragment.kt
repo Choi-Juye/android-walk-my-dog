@@ -7,14 +7,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.chloedewyes.walkmydog.R
-import com.chloedewyes.walkmydog.adpater.DogAdapter
 import com.chloedewyes.walkmydog.adpater.WalkAdapter
 import com.chloedewyes.walkmydog.databinding.FragmentJournalBinding
 import com.chloedewyes.walkmydog.ui.viewmodels.FirestoreViewModel
-import com.google.android.material.snackbar.Snackbar
 
 class JournalFragment : Fragment() {
 

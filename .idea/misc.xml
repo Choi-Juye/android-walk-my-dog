@@ -30,9 +30,23 @@
         <entry key="..\:/Users/admin/AndroidStudioProjects/Walk_My_Dog/app/src/main/res/layout/item_dog.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/Walk_My_Dog/app/src/main/res/layout/item_walk.xml" value="0.33" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/Walk_My_Dog/app/src/main/res/menu/bottom_nav_menu.xml" value="0.38645833333333335" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.32916666666666666" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/drawable/grey_radius.xml" value="0.32916666666666666" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/drawable/ic_close.xml" value="0.32916666666666666" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/drawable/ic_edit.xml" value="0.32916666666666666" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/drawable/ic_launcher_background.xml" value="0.32916666666666666" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/drawable/theme_radius.xml" value="0.32916666666666666" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/layout/activity_main.xml" value="0.31302083333333336" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/layout/custom_bottom_btn.xml" value="0.31302083333333336" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/layout/fragment_journal.xml" value="0.31302083333333336" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/layout/fragment_profile.xml" value="0.21822916666666667" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/layout/fragment_profile_dog.xml" value="0.31302083333333336" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/layout/fragment_profile_person.xml" value="0.31302083333333336" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/layout/fragment_sign_in.xml" value="0.31302083333333336" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/layout/fragment_tracking.xml" value="0.33" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/layout/item_dog.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/layout/item_walk.xml" value="0.38645833333333335" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/walk-my-dog/app/src/main/res/menu/bottom_nav_menu.xml" value="0.31302083333333336" />
       </map>
     </option>
   </component>

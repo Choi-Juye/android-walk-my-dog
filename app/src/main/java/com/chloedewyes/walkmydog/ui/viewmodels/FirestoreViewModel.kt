@@ -38,7 +38,7 @@ class FirestoreViewModel : ViewModel() {
 
     fun insertMap(bitmap: Bitmap) {
         val outputStream = ByteArrayOutputStream()
-        bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
         val mapData = outputStream.toByteArray()
         firebaseRepository.mapReference(bitmap.toString()).putBytes(mapData)
     }
@@ -48,7 +48,7 @@ class FirestoreViewModel : ViewModel() {
     }
 
     fun selectUser() {
-        firebaseRepository.userReference().addSnapshotListener { document, error ->
+        firebaseRepository.userReference().addSnapshotListener { document, _ ->
             if (document != null) {
                 val userData = document.toObject<User>()!!
                 _userName.value = userData.name
@@ -59,14 +59,14 @@ class FirestoreViewModel : ViewModel() {
     fun selectDog() {
         firebaseRepository.dogReference().get()
             .addOnSuccessListener { result ->
-                var dogList: MutableList<Dog> = mutableListOf()
+                val dogList: MutableList<Dog> = mutableListOf()
 
                 if (result == null) {
                     _dogDocument.value = null
                 } else {
                     for (document in result) {
-                        var dogData = document.toObject<Dog>()
-                        dogList.add(dogData!!)
+                        val dogData = document.toObject<Dog>()
+                        dogList.add(dogData)
                     }
                     _dogDocument.value = dogList
                 }
@@ -76,14 +76,14 @@ class FirestoreViewModel : ViewModel() {
     fun selectWalk() {
         firebaseRepository.walkReference().get()
             .addOnSuccessListener { result ->
-                var walkList: MutableList<Walk> = mutableListOf()
+                val walkList: MutableList<Walk> = mutableListOf()
 
                 if (result == null) {
                     _walkDocument.value = null
                 } else {
                     for (document in result) {
-                        var walkData = document.toObject<Walk>()
-                        walkList.add(walkData!!)
+                        val walkData = document.toObject<Walk>()
+                        walkList.add(walkData)
                     }
                     _walkDocument.value = walkList
                 }

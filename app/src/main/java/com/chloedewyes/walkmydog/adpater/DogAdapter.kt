@@ -2,9 +2,6 @@ package com.chloedewyes.walkmydog.adpater
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.BindingAdapter
-import androidx.databinding.ObservableArrayList
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView

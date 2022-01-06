@@ -2,9 +2,7 @@ package com.chloedewyes.walkmydog.util
 
 import android.Manifest
 import android.content.Context
-import android.location.Location
 import android.os.Build
-import com.chloedewyes.walkmydog.service.Polyline
 import com.vmadalin.easypermissions.EasyPermissions
 import java.util.concurrent.TimeUnit
 

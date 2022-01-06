@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setupWithNavController(navHostFragment.findNavController())
 
         navHostFragment.findNavController()
-            .addOnDestinationChangedListener { controller, destination, arguments ->
+            .addOnDestinationChangedListener { _, destination, _ ->
                 when(destination.id){
                     R.id.trackingFragment, R.id.journalFragment, R.id.profileFragment ->
                         binding.bottomNavigationView.visibility = View.VISIBLE

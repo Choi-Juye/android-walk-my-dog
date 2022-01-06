@@ -27,7 +27,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDate"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvDate"
+            tool:ignore="ContentDescription" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvDate"
@@ -35,7 +36,7 @@
             android:layout_height="wrap_content"
 
             android:text="@{String.valueOf(walk.timestamp)}"
-            tool:text="2022년 12월 21일"
+            tool:text="2022년 00월 00일"
             android:textSize="@dimen/content_size"
             android:textColor="@color/black"
             app:layout_constraintHorizontal_bias="0.5"

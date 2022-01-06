@@ -18,7 +18,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +49,7 @@
                     android:textSize="@dimen/content_size"
                     app:layout_constraintBottom_toTopOf="@+id/etDogName"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDog"></androidx.appcompat.widget.AppCompatTextView>
+                    app:layout_constraintTop_toBottomOf="@+id/tvDog" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etDogName"
@@ -64,7 +64,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/tvDogGender"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDogName"></androidx.appcompat.widget.AppCompatEditText>
+                    app:layout_constraintTop_toBottomOf="@+id/tvDogName" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvDogGender"
@@ -136,7 +136,7 @@
                     android:textSize="@dimen/content_size"
                     app:layout_constraintBottom_toTopOf="@+id/etDogAge"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/clDogGender"></androidx.appcompat.widget.AppCompatTextView>
+                    app:layout_constraintTop_toBottomOf="@+id/clDogGender" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etDogAge"
@@ -148,7 +148,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/content_size"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDogAge"></androidx.appcompat.widget.AppCompatEditText>
+                    app:layout_constraintTop_toBottomOf="@+id/tvDogAge" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvDogWeight"
@@ -160,7 +160,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/etDogAge"
                     android:text="몸무게를 작성해주세요"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/content_size"></androidx.appcompat.widget.AppCompatTextView>
+                    android:textSize="@dimen/content_size" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etDogWeight"
@@ -172,7 +172,7 @@
                     android:layout_marginEnd="@dimen/margin_default"
                     android:layout_marginTop="@dimen/margin_default"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/content_size"></androidx.appcompat.widget.AppCompatEditText>
+                    android:textSize="@dimen/content_size" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

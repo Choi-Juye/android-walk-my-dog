@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Walk My Dog</string>
+    <string name="app_name">어야가자</string>
 
     <string name="start">산책 시작</string>
     <string name="stop">산책 끝</string>
