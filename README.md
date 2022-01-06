@@ -1,5 +1,6 @@
 
 # 어야가자
+## Skill.
 **Android**
 
 - Kotlin | Foreground Service | Constraint Layout |  Custom View
@@ -16,9 +17,10 @@
 
 - Google Map | Easyermission
 
-   
-   
- # Preview.
+## Journal.
+[https://velog.io/@chloedewyes/series/어야가자-개발일지](https://velog.io/@chloedewyes/series/%EC%96%B4%EC%95%BC%EA%B0%80%EC%9E%90-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80)
+
+## Preview.
 - 마이 탭에서 회원가입 시 등록한 보호자 닉네임을 변경할 수 있고, 강아지 정보를 등록할 수 있습니다.
 
 ![정보 등록](https://user-images.githubusercontent.com/95920579/148366517-6e793f22-01e3-41fb-87bd-0d5d4f460199.gif)
