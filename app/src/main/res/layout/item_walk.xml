@@ -16,59 +16,32 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/margin_default_mul">
+        android:paddingBottom="@dimen/margin_default_mul"
+        android:layout_marginTop="@dimen/margin_default">
 
         <ImageView
             android:id="@+id/ivMapImage"
             android:layout_width="match_parent"
             android:layout_height="350sp"
+            android:layout_marginTop="@dimen/margin_default"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDate"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_default"
+
             android:text="@{String.valueOf(walk.timestamp)}"
-            tool:text="23.12.21"
+            tool:text="2022년 12월 21일"
             android:textSize="@dimen/content_size"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toStartOf="@+id/tvTime"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivMapImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/ivMapImage"
             />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_default"
-            android:text='@{String.valueOf(walk.timeInMillis) + " min"}'
-            tool:text="0 min"
-            android:textSize="@dimen/content_size"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintTop_toBottomOf="@+id/ivMapImage" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvDistance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_default"
-            android:text='@{String.valueOf(walk.distanceInMeters) + " km"}'
-            tool:text="0 km"
-            android:textSize="@dimen/content_size"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@+id/tvTime"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintTop_toBottomOf="@+id/ivMapImage" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

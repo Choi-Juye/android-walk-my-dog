@@ -16,26 +16,25 @@
             android:id="@+id/mapView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/clWalkLayout"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/clWalkLayout" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
-
             android:id="@+id/btnStart"
             android:layout_width="0dp"
             android:layout_height="@dimen/cardView_height"
-            android:layout_marginBottom="@dimen/default_height"
             android:layout_marginStart="@dimen/margin_default"
             android:layout_marginEnd="@dimen/margin_default"
+            android:layout_marginBottom="@dimen/default_height"
             app:cardBackgroundColor="@color/theme_yellow"
             app:cardCornerRadius="@dimen/btn_corner_radius"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:id="@+id/btnStartTxt"
@@ -51,17 +50,17 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:visibility="gone"
+           android:visibility="gone"
             android:id="@+id/clWalkLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="@color/white"
             android:paddingTop="@dimen/default_height"
             android:paddingBottom="@dimen/default_height"
-            android:background="@color/white"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvTimer"
@@ -70,11 +69,11 @@
                 android:layout_marginBottom="@dimen/margin_default_mul"
                 android:text="@string/default_timer"
                 android:textSize="@dimen/medium_content_size"
+                app:layout_constraintBottom_toTopOf="@+id/btnStop"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/btnStop" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnStop"
@@ -84,10 +83,10 @@
                 android:layout_marginEnd="@dimen/margin_default"
                 app:cardBackgroundColor="@color/theme_yellow"
                 app:cardCornerRadius="@dimen/btn_corner_radius"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintHorizontal_bias="0.5">
 
                 <TextView
                     android:id="@+id/btnStopTxt"
@@ -95,6 +94,33 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/stop"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/content_size"
+                    android:textStyle="bold"></TextView>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:visibility="gone"
+                android:id="@+id/btnSave"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/cardView_height"
+                android:layout_marginStart="@dimen/margin_default"
+                android:layout_marginEnd="@dimen/margin_default"
+                app:cardBackgroundColor="@color/theme_yellow"
+                app:cardCornerRadius="@dimen/btn_corner_radius"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5">
+
+                <TextView
+                    android:id="@+id/btnSaveTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="산책 저장"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="@dimen/content_size"

@@ -90,7 +90,4 @@ class FirestoreViewModel : ViewModel() {
                 Log.d("test", "${walkDocument.value}")
             }
     }
-
-
-
 }

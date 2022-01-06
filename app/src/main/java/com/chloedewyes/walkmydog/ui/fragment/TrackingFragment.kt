@@ -26,6 +26,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.material.snackbar.Snackbar
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
 import java.text.SimpleDateFormat
@@ -72,8 +73,19 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
         }
 
         binding.btnStop.setOnClickListener {
-            saveToDb()
+            binding.btnStop.visibility = View.GONE
+            binding.tvTimer.visibility = View.GONE
+            binding.btnSave.visibility = View.VISIBLE
+
             sendCommandToService(ACTION_STOP_SERVICE)
+        }
+
+        binding.btnSave.setOnClickListener {
+            saveToDb()
+            binding.clWalkLayout.visibility = View.GONE
+            binding.btnSave.visibility = View.GONE
+            binding.tvTimer.visibility = View.VISIBLE
+            binding.btnStart.visibility = View.VISIBLE
         }
 
         subscribeToObservers()
@@ -98,22 +110,17 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
         })
     }
 
-    private fun saveToDb(){
+    private fun saveToDb() {
         map?.snapshot { bitmap ->
 
             if (bitmap != null) {
                 viewModel.insertMap(bitmap)
             }
 
-            val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+            val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일", Locale.getDefault())
             val dataTimestamp = dateFormat.format(Calendar.getInstance().timeInMillis)
 
-            var distanceInMeters = 0
-            for (polyline in pathPoints) {
-                distanceInMeters += TrackingUtility.calculatePolylineLength(polyline).toInt()
-            }
-
-            val walk = Walk(bitmap.toString(), dataTimestamp, curTimeInMillis, distanceInMeters)
+            val walk = Walk(bitmap.toString(), dataTimestamp)
 
             viewModel.insertWalk(walk)
 
@@ -131,7 +138,8 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
         }
     }
 
-    private fun zoomToSeeWholeTrack() {
+
+    private fun zoomToSeeWholeTrack(): Boolean {
         val bounds = LatLngBounds.Builder()
         for (polyline in pathPoints) {
             for (point in polyline) {
@@ -149,6 +157,8 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
                 (height * 0.05f).toInt()
             )
         )
+
+        return true
     }
 
     private fun addLatestPolyline() {
@@ -172,8 +182,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
 
         } else {
             zoomToSeeWholeTrack()
-            binding.btnStart.visibility = View.VISIBLE
-            binding.clWalkLayout.visibility = View.GONE
         }
     }
 
