@@ -177,6 +177,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking), EasyPermissions.P
         this.isTracking = isTracking
         if (isTracking) {
             binding.btnStart.visibility = View.GONE
+            binding.btnStop.visibility = View.VISIBLE
             binding.clWalkLayout.visibility = View.VISIBLE
 
         } else {
