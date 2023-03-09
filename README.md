@@ -18,7 +18,7 @@
 - Google Map | Easyermission
 
 ## Journal.
-[https://velog.io/@chloedewyes/series/어야가자-개발일지](https://velog.io/@chloedewyes/series/%EC%96%B4%EC%95%BC%EA%B0%80%EC%9E%90-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80)
+[어야가자-개발일지](https://blog.naver.com/love_most_deeply/223039839215)
 
 ## Preview.
 - 마이 탭에서 회원가입 시 등록한 보호자 닉네임을 변경할 수 있고, 강아지 정보를 등록할 수 있습니다.
