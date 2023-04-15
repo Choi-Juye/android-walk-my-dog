@@ -18,7 +18,7 @@
 - Google Map | Easyermission
 
 ## Journal.
-[어야가자-개발일지](https://blog.naver.com/love_most_deeply/223039839215)
+[어야가자-개발일지](https://lkjkroil.tistory.com/entry/Andorid-산책-앱-개발-일지-3-구글-맵에-동선-그리기)
 
 ## Preview.
 - 마이 탭에서 회원가입 시 등록한 보호자 닉네임을 변경할 수 있고, 강아지 정보를 등록할 수 있습니다.
